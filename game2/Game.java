@@ -13,6 +13,12 @@ public class Game extends JPanel {
 	private void moveBall() {
 		mX++;
 		mY++;
+		if (mX > this.getWidth()) {
+			mX = 0;
+		}
+		if (mY > this.getHeight()) {
+			mY = 0;
+		}
 	}
 
 	@Override
