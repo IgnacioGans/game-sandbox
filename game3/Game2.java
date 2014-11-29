@@ -1,8 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.Swing.JFrame;
-import javax.Swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Game2 extends JPanel {
