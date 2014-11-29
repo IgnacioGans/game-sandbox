@@ -13,13 +13,13 @@ public class Board extends JPanel {
 
 	private void initBoard() {
 		loadImage();
-		int w = mImg.getWidth();
-		int h = mImg.getHeight();
+		int w = mImg.getWidth(this);
+		int h = mImg.getHeight(this);
 		setPreferredSize(new Dimension(w,h));
 	}
 
 	private void loadImage() {
-		ImageIcon ii = new ImageIcon("derp.jpg");
+		ImageIcon ii = new ImageIcon("derp.png");
 		mImg = ii.getImage();
 	}
 
