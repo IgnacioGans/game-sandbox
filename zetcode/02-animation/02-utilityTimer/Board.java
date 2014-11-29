@@ -26,7 +26,7 @@ public class Board extends JPanel {
 
 	private void loadImage() {
 		ImageIcon ii = new ImageIcon("star.png");
-		star = ii.getImage;
+		star = ii.getImage();
 	}
 
 	private void initBoard() {
@@ -49,7 +49,7 @@ public class Board extends JPanel {
 		drawStar(g);
 	}
 
-	private void drawStar(g) {
+	private void drawStar(Graphics g) {
 		g.drawImage(star, x, y, this);
 		Toolkit.getDefaultToolkit().sync();
 	}
