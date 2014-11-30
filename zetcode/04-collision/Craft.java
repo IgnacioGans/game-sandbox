@@ -6,30 +6,19 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Craft {
+public class Craft extends Entity {
 
 	private int mDx;
 	private int mDy;
-	private int mX;
-	private int mY;
-	private boolean mVisible;
-	private int mWidth;
-	private int mHeight;
-	private Image mImage;
 	private ArrayList<Missile> mMissiles;
 
-	private final String IMAGE_FILE = "craft.png";
+	// private final String IMAGE_FILE = "craft.png";
 	private final int CRAFT_SIZE = 20;
 
 	public Craft() {
-		ImageIcon ii = new ImageIcon(IMAGE_FILE);
-		mImage = ii.getImage();
+		IMAGE_FILE = "craft.png";
+		this.init(40,60);
 		mMissiles = new ArrayList<Missile>();
-		mX = 40;
-		mY = 60;
-		mVisible = true;
-		mWidth = mImage.getWidth(null);
-		mHeight = mImage.getHeight(null);
 	}
 
 	public void move() {
@@ -43,32 +32,8 @@ public class Craft {
 		}
 	}
 
-	public int getX() {
-		return mX;
-	}
-
-	public int getY() {
-		return mY;
-	}
-
-	public Image getImage() {
-		return mImage;
-	}
-
 	public ArrayList<Missile> getMissiles() {
 		return mMissiles;
-	}
-
-	public void setVisible(boolean visible) {
-		mVisible = visible;
-	}
-
-	public boolean isVisible() {
-		return mVisible;
-	}
-
-	public Rectangle getBounds() {
-		return new Rectangle(mX, mY, mWidth, mHeight);
 	}
 
 	public void keyPressed(KeyEvent e) {
