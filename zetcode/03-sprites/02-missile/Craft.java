@@ -43,7 +43,7 @@ public class Craft {
 		return mImage;
 	}
 
-	public ArrayList getMissiles() {
+	public ArrayList<Missile> getMissiles() {
 		return mMissiles;
 	}
 
