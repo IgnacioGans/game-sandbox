@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class Craft {
-	private String craft = "craft.png";
 
 	private int mDx;
 	private int mDy;
@@ -16,10 +15,11 @@ public class Craft {
 
 	private ArrayList<Missile> mMissiles;
 
+	private final String IMAGE_FILE = "craft.png";
 	private final int CRAFT_SIZE = 20;
 
 	public Craft() {
-		ImageIcon ii = new ImageIcon(craft);
+		ImageIcon ii = new ImageIcon(IMAGE_FILE);
 		mImage = ii.getImage();
 		mMissiles = new ArrayList<Missile>();
 		mX = 40;
