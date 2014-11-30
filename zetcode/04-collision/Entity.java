@@ -9,9 +9,9 @@ public abstract class Entity {
 	protected int mWidth;
 	protected int mHeight;
 	protected Image mImage;
-	boolean mVisible;
+	protected boolean mVisible;
 
-	protected String IMAGE_FILE;
+	protected static String IMAGE_FILE;
 
 	protected void init(int x, int y) {
 		ImageIcon ii = new ImageIcon(IMAGE_FILE);
