@@ -14,7 +14,6 @@ public class Craft {
 
 	public Craft() {
 		ImageIcon ii = new ImageIcon(craft);
-		// ImageIcon ii = new ImageIcon(this.getClass().getResource(craft));
 		mImage = ii.getImage();
 		mX = 40;
 		mY = 60;
