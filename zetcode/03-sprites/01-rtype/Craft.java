@@ -13,7 +13,8 @@ public class Craft {
 	private Image mImage;
 
 	public Craft() {
-		ImageIcon ii = new ImageIcon(this.getClass().getResource(craft));
+		ImageIcon ii = new ImageIcon(craft);
+		// ImageIcon ii = new ImageIcon(this.getClass().getResource(craft));
 		mImage = ii.getImage();
 		mX = 40;
 		mY = 60;
@@ -36,33 +37,33 @@ public class Craft {
 		return mImage;
 	}
 
-	public void keyPressed(Event e) {
+	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_LEFT) {
-			dx = -1;
+			mDx = -1;
 		}
 
 		if (key == KeyEvent.VK_RIGHT) {
-			dx = 1;
+			mDx = 1;
 		}
 
 		if (key == KeyEvent.VK_UP) {
-			dy = -1;
+			mDy = -1;
 		}
 
 		if (key == KeyEvent.VK_DOWN) {
-			dy = 1;
+			mDy = 1;
 		}
 	}
 
-	public void keyReleased(Event e) {
+	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 
 		if ((key == KeyEvent.VK_LEFT) || (key == KeyEvent.VK_RIGHT)) {
-			dx = 0;
+			mDx = 0;
 		}
 		if ((key == KeyEvent.VK_UP) || (key == KeyEvent.VK_DOWN)) {
-			dy = 0;
+			mDy = 0;
 		}
 	}
 }
