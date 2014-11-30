@@ -3,29 +3,32 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class Missile {
-	private int mX, mY;
-	private int mWidth, mHeight;
+public class Alien {
+	private int mX;
+	private int mY;
+	private int mWidth;
+	private int mHeight;
+	private boolean mVisible;
 	private Image mImage;
-	boolean mVisible;
 
-	private final String IMAGE_FILE = "missile.png";
-	private final int BOARD_WIDTH = 390;
-	private final int MISSILE_SPEED = 2;
+	private final String IMAGE_FILE = "alien.png";
 
-	public Missile(int x, int y) {
+	public Alien(int x, int y) {
 		ImageIcon ii = new ImageIcon(IMAGE_FILE);
 		mImage = ii.getImage();
 		mVisible = true;
-
+		
 		mWidth = mImage.getWidth(null);
 		mHeight = mImage.getHeight(null);
 		mX = x;
 		mY = y;
 	}
 
-	public Image getImage() {
-		return mImage;
+	public void move() {
+		if (mX < 0) {
+			mX = 400;
+		}
+		mX--;
 	}
 
 	public int getX() {
@@ -44,14 +47,11 @@ public class Missile {
 		mVisible = visible;
 	}
 
-	public Rectangle getBounds() {
-		return new Rectangle(mX, mY, mWidth, mHeight);
+	public Image getImage() {
+		return mImage;
 	}
 
-	public void move() {
-		mX += MISSILE_SPEED;
-		if (mX > BOARD_WIDTH) {
-			mVisible = false;
-		}
+	public Rectangle getBounds() {
+		return new Rectangle(mX, mY, mWidth, mHeight);
 	}
 }
