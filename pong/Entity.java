@@ -4,15 +4,15 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public abstract class Entity {
-	private int x;
-	private int y;
-	private int width;
-	private int height;
-	private String spritePath;
-	private Image image;
-	private boolean visible;
+	protected int x;
+	protected int y;
+	protected int width;
+	protected int height;
+	protected String spritePath;
+	protected Image image;
+	protected boolean visible;
 
-	private void init(int x, int y) {
+	protected void init(int x, int y) {
 		ImageIcon ii = new ImageIcon(spritePath);
 		image = ii.getImage();
 
@@ -49,5 +49,9 @@ public abstract class Entity {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public void move() {
+		// MUST be reimplemented in subclasses
 	}
 }
