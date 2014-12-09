@@ -35,7 +35,7 @@ public class Paddle extends Sprite implements Commons {
 		}
 
 		else if (key == KeyEvent.VK_RIGHT) {
-			dx = -2;
+			dx = 2;
 		}
 	}
 

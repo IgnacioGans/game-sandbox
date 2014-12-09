@@ -69,7 +69,7 @@ public class Board extends JPanel implements Commons {
 			FontMetrics metr = this.getFontMetrics(font);
 			g.setColor(Color.BLACK);
 			g.setFont(font);
-			g.drawString(message, Commons.WIDTH - metr.stringWidth(message)/2, Commons.WIDTH/2);
+			g.drawString(message, (Commons.WIDTH - metr.stringWidth(message))/2, Commons.HEIGHT/2);
 		}
 
 		Toolkit.getDefaultToolkit().sync();
