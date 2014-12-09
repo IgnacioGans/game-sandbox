@@ -48,4 +48,8 @@ public class Ball extends Sprite implements Commons {
 	public void setYDir(int ydir) {
 		this.ydir = ydir;
 	}
+
+	public int getYDir() {
+		return ydir;
+	}
 }
