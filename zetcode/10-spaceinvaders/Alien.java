@@ -9,7 +9,7 @@ public class Alien extends Sprite {
 		mY = y;
 		mBomb = new Bomb(x,y);
 		ImageIcon ii = new ImageIcon(path);
-		mImage = ii.getImage();
+		setImage(ii.getImage);
 	}
 
 	public void act(int direction) {
