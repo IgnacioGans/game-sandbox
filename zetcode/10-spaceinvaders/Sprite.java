@@ -27,6 +27,10 @@ public class Sprite {
 		mImage = image;
 	}
 
+	public Image getImage() {
+		return mImage;
+	}
+
 	public void setX(int x) {
 		mX = x;
 	}

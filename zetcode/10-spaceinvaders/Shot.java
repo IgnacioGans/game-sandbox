@@ -8,7 +8,7 @@ public class Shot extends Sprite {
 	public Shot() {
 	}
 
-	pbulic Shot(int x, int y) {
+	public Shot(int x, int y) {
 		ImageIcon ii = new ImageIcon(path);
 		setImage(ii.getImage());
 		setX(x + H_SPACE);
