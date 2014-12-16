@@ -134,8 +134,6 @@ public class Board extends JPanel implements Runnable, Commons {
 		
 		g.setColor(new Color(0, 32, 48));
 		g.fillRect(50, BOARD_WIDTH/2 - 30, BOARD_WIDTH-100, 50);
-		g.setColor(Color.WHITE);
-		g.fillRect(50, BOARD_WIDTH/2 - 30, BOARD_WIDTH-100, 50);
 
 		Font small = new Font("Helvetica", Font.BOLD, 14);
 		FontMetrics metr = this.getFontMetrics(small);
@@ -223,7 +221,7 @@ public class Board extends JPanel implements Runnable, Commons {
 		Random generator = new Random();
 
 		while (i3.hasNext()) {
-			int shot = generator.nextInt(15);
+			int shot = generator.nextInt(25);
 			Alien a = (Alien)i3.next();
 			Alien.Bomb b = a.getBomb();
 			if ((shot == CHANCE) && (a.isVisible()) && (b.isDestroyed())) {
