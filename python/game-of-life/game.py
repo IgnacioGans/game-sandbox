@@ -13,8 +13,9 @@ class Cell:
 		self.y = y
 
 		self.rect = pygame.Rect((x,y), (self.CELL_WIDTH, self.CELL_HEIGHT))
-		self.rectinner = self.rect.inflate(-3, -3)
+		self.rectinner = self.rect.inflate(-4, -4)
 		self.alive = False
+		self.changed = True
 
 	def draw(self, screen):
 		pygame.draw.rect(screen, (0, 0, 0), self.rect)
@@ -23,6 +24,13 @@ class Cell:
 		else:
 			innercolour = (255, 255, 255)
 		pygame.draw.rect(screen, innercolour, self.rectinner)
+		self.changed = False
+
+	def toggleAlive(self):
+		"""Toggles the alive state of the current cell."""
+		self.alive = not self.alive
+		self.changed = True
+	
 	
 		
 	
@@ -37,7 +45,7 @@ class Game:
 
 		self.rows = self.columns = 16
 
-		self.framerate = 1
+		self.framerate = 3
 		self.clock = pygame.time.Clock()
 
 		self.__running = True
@@ -53,12 +61,11 @@ class Game:
 			self.cells.append(l)
 
 		#print len(self.cells)
-		self.cells[2][2].alive = True
-		self.cells[3][2].alive = True
-		self.cells[4][2].alive = True
-		self.cells[1][3].alive = True
-		self.cells[2][3].alive = True
-		self.cells[3][3].alive = True
+		self.cells[4][3].alive = True
+		self.cells[4][4].alive = True
+		self.cells[4][5].alive = True
+		self.cells[3][5].alive = True
+		self.cells[2][4].alive = True
 
 
 	def main(self):
@@ -67,11 +74,18 @@ class Game:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					self.__running = False
+				elif event.type == pygame.MOUSEBUTTONDOWN:
+					xClick = event.pos[0]/Cell.CELL_WIDTH
+					yClick = event.pos[1]/Cell.CELL_HEIGHT
+					self.cells[xClick][yClick].toggleAlive()
+
 					
-			self.screen.fill((0,0,0))
+			#self.screen.fill((0,0,0))
 			for i in range(len(self.cells)):
 				for j in range(len(self.cells[i])):
-					self.cells[i][j].draw(self.screen)
+					if self.cells[i][j].changed:
+						self.cells[i][j].draw(self.screen)
+
 			pygame.display.flip()
 
 			# Work out next iteration
@@ -87,13 +101,13 @@ class Game:
 						if self.cells[neigh[k][0]][neigh[k][1]].alive == True:
 							count += 1
 
-					print "(%s, %s): %s. %s neighbours" %(i, j, count, len(neigh))
+					#print "(%s, %s): %s. %s neighbours" %(i, j, count, len(neigh))
 					if self.cells[i][j].alive:
 						if count < 2 or count > 3:
-							newCells[i][j].alive = False
+							newCells[i][j].toggleAlive()
 					else:
 						if count == 3:
-							newCells[i][j].alive = True
+							newCells[i][j].toggleAlive()
 
 
 			self.cells = newCells
