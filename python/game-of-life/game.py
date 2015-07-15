@@ -1,59 +1,128 @@
+"""
+A simulation of Conway's game of life, written in Pygame.
+"""
 import pygame
+import copy
 
 class Cell:
-	"""A single cell in the world."""
+	"""A single cell in the game of life."""
 
+	CELL_WIDTH = CELL_HEIGHT = 16
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
-		self.width = self.height = 32
-		self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-		self.alive = False # True if the cell is "alive"
+		self.rect = pygame.Rect((x,y), (self.CELL_WIDTH, self.CELL_HEIGHT))
+		self.rectinner = self.rect.inflate(-3, -3)
+		self.alive = False
 
-	def position(self):
-		return self.x, self.y
+	def draw(self, screen):
+		pygame.draw.rect(screen, (0, 0, 0), self.rect)
+		if self.alive:
+			innercolour = (255, 0, 0)
+		else:
+			innercolour = (255, 255, 255)
+		pygame.draw.rect(screen, innercolour, self.rectinner)
 	
+		
+	
+
 class Game:
-	"""Main game logic, render loop etc."""
+	"""Main game logic."""
 
-	def __init__(self):
-		self.screen = pygame.display.set_mode((640,480))
+	def __init__(self, width = 256, height = 256):
+		self.width = width
+		self.height = height
+		self.screen = pygame.display.set_mode((width, height))
+
+		self.rows = self.columns = 16
+
+		self.framerate = 1
 		self.clock = pygame.time.Clock()
-		self.framerate = 30
-		self.running = True
 
-		# initialise grid
-		self.rows = self.columns = 8
-		self.grid = list(list())
+		self.__running = True
+
+		self.createCells()
+
+	def createCells(self):
+		self.cells = list(list())
 		for i in range(self.rows):
-			row = list()
+			l = list()
 			for j in range(self.columns):
-				c = Cell(i,j)
-				row.append(c)
-			self.grid.append(row)
+				l.append(Cell(i*Cell.CELL_WIDTH, j*Cell.CELL_HEIGHT))
+			self.cells.append(l)
+
+		#print len(self.cells)
+		self.cells[2][2].alive = True
+		self.cells[3][2].alive = True
+		self.cells[4][2].alive = True
+		self.cells[1][3].alive = True
+		self.cells[2][3].alive = True
+		self.cells[3][3].alive = True
+
 
 	def main(self):
-		while self.running:
-			# event checking
+		while self.__running:
+			# Check for events
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					self.running = False
-
-			newgrid = self.grid
-			for i in len(self.grid):
-				for j in len(self.grid[i]):
-					checkNeighbours(i,j)
-
+					self.__running = False
+					
 			self.screen.fill((0,0,0))
+			for i in range(len(self.cells)):
+				for j in range(len(self.cells[i])):
+					self.cells[i][j].draw(self.screen)
 			pygame.display.flip()
+
+			# Work out next iteration
+			#newCells = self.cells
+			newCells = copy.deepcopy(self.cells)
+			for i in range(len(self.cells)):
+				for j in range(len(self.cells[i])):
+					neigh = self.getCellNeighbours(i,j)
+					count = 0
+					#print len(neigh)
+					#print neigh
+					for k in range(len(neigh)):
+						if self.cells[neigh[k][0]][neigh[k][1]].alive == True:
+							count += 1
+
+					print "(%s, %s): %s. %s neighbours" %(i, j, count, len(neigh))
+					if self.cells[i][j].alive:
+						if count < 2 or count > 3:
+							newCells[i][j].alive = False
+					else:
+						if count == 3:
+							newCells[i][j].alive = True
+
+
+			self.cells = newCells
+			
 			self.clock.tick(self.framerate)
 
-	# Returns the number of neighbours of a particular Cell that are alive.
-	# TODO
-	def checkNeighbours(self, i, j):
-		pass
-			
+	def getCellNeighbours(self, i, j):
+		l = list(list())
+		if i-1 >= 0:
+			l.append([i-1, j])
+			if j-1 >= 0:
+				l.append([i-1, j-1])
+			if j+1 < len(self.cells):
+				l.append([i-1, j+1])
 
-g = Game()
-g.main()
+		if i+1 < len(self.cells[0]):
+			l.append([i+1, j])
+			if j-1 >= 0:
+				l.append([i+1, j-1])
+			if j+1 < len(self.cells):
+				l.append([i+1, j+1])
+
+		if j-1 >= 0:
+			l.append([i, j-1])
+		if j+1 < len(self.cells):
+			l.append([i, j+1])
+
+		return l
+	
+
+window = Game()
+window.main()
